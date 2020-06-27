@@ -6,6 +6,8 @@ import AuthPage from './components/AuthPage.vue'
 
 Vue.config.productionTip = false
 
+Vue.use(VueRouter)
+
 const routes = [
   { 
     path: '/auth',
