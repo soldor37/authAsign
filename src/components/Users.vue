@@ -130,10 +130,12 @@ tr:not(.usersTable__toolbar):hover {background-color: #f5f5f5;}
 }
 .usersTable{
   width: 90%;
+  border-collapse: collapse;
   box-shadow: 0 0 15px rgba(122,122,122,0.5);
 }
 .usersTable th{
   height: 50px;
+  text-align: left;
 }
 .usersTable th, td{
   padding: 15px;
