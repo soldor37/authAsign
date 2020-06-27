@@ -29,7 +29,7 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    margin: 0px; 
+    margin: auto; 
 }
 /* .app{
   display: flex;
@@ -38,7 +38,7 @@ body{
 } */
 .header-content {
   background-color: skyblue;
-  height: 75px;
+  height: 70px;
   margin: 0px;
   display: flex;
   flex-flow: row wrap;
@@ -46,6 +46,9 @@ body{
   align-items: center;
   align-content: center;
   position: relative;
+}
+.header-title{
+  font-size: 25px;
 }
 .view-content{
   flex: 1;
@@ -56,10 +59,15 @@ body{
 .footer-content {
   position: relative;
   background-color: skyblue;
-  height: 75px;
+  height: 70px;
   margin: 0px;
   display: flex;
   flex-flow: row wrap;
+  justify-content: flex-start;
+}
+.footer-title{
+  margin: 30px 0px 10px 10px;
+  display: flex;
   justify-content: flex-start;
 }
 </style>
