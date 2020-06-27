@@ -1,10 +1,18 @@
 <template>
-  <div id="app">
-    <header></header>
-    <content>
+  <div id="app" class="app">
+    <body>
+      <header class="header-content">
+      <div class="header-title">Test assignment</div>
+    </header>
+    <content class="view-content">
       <router-view></router-view>
     </content>
-    <footer></footer>
+    <footer class="footer-content">
+      <div class="footer-title">
+        <span class="footer-title__text">© 2020</span>
+      </div>
+    </footer>
+    </body>
   </div>
 </template>
 
@@ -13,4 +21,45 @@ export default {};
 </script>
 
 <style>
+html{
+    height: 100%;
+    
+}
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0px; 
+}
+/* .app{
+  display: flex;
+  flex-flow: column wrap;
+  margin: -10px;
+} */
+.header-content {
+  background-color: skyblue;
+  height: 75px;
+  margin: 0px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  position: relative;
+}
+.view-content{
+  flex: 1;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+.footer-content {
+  position: relative;
+  background-color: skyblue;
+  height: 75px;
+  margin: 0px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
 </style>

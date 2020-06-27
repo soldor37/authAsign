@@ -18,7 +18,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+
+};
 </script>
 
 
@@ -28,6 +30,7 @@ export default {};
   align-items: center;
   align-content: center;
   justify-content: center;
+  margin: 10px;
 }
 .window__title{
   font-size: 20px;
