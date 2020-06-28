@@ -1,10 +1,10 @@
 <template>
-  <div id="app" class="app">
-    <body>
-      <header class="header-content">
+<div id="app" class="app">
+  <body>
+    <header class="header-content">
       <div class="header-title">Test assignment</div>
       <div class="header__logout">
-        <button v-if="isLoggedIn" class="header__logout__btn" @click="logout()" >Logout</button>
+        <button v-if="isLoggedIn" class="header__logout__btn" @click="logout()">Logout</button>
       </div>
     </header>
     <content class="view-content">
@@ -15,14 +15,13 @@
         <span class="footer-title__text">© 2020</span>
       </div>
     </footer>
-    </body>
-  </div>
+  </body>
+</div>
 </template>
 
 <script>
 export default {
-  data: () => ({
-  }),
+  data: () => ({}),
   computed: {
     isLoggedIn: function() {
       return this.$store.getters.isLoggedIn;
@@ -44,20 +43,20 @@ export default {
         throw err;
       });
     });
-  }
+  },
+  
 };
 </script>
 
 <style>
-html{
-    height: 100%;
-    
+html {
+  height: 100%;
 }
-body{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: auto; 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: auto;
 }
 /* .app{
   display: flex;
@@ -74,12 +73,13 @@ body{
   align-items: center;
   align-content: center;
   position: relative;
+  box-shadow: 0 0 15px rgba(122, 122, 122, 0.5);
 }
-.header-title{
+.header-title {
   font-size: 25px;
-  margin-left:45%;
+  margin-left: 45%;
 }
-.view-content{
+.view-content {
   flex: 1;
   display: flex;
   flex-flow: row wrap;
@@ -93,38 +93,39 @@ body{
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
+  box-shadow: 0 0 15px rgba(122, 122, 122, 0.5);
 }
-.footer-title{
+.footer-title {
   margin: 30px 0px 10px 10px;
   display: flex;
   justify-content: flex-start;
 }
-.header__logout{
+.header__logout {
   align-self: center;
   margin-right: 15px;
 }
-.header__logout__btn:hover{
-  color: rgb(24,24,24);
-  border: 1px solid rgb(198,198,198);
+.header__logout__btn:hover {
+  color: rgb(24, 24, 24);
+  border: 1px solid rgb(198, 198, 198);
   background: #f7f7f7 linear-gradient(#f7f7f7, #f1f1f1);
-  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 .header__logout__btn:focus {
   outline: none;
 }
-.header__logout__btn{
+.header__logout__btn {
   display: inline-block;
-  font-family: arial,sans-serif;
+  font-family: arial, sans-serif;
   font-size: 15px;
   font-weight: bold;
-  color: rgb(68,68,68);
+  color: rgb(68, 68, 68);
   text-decoration: none;
   user-select: none;
   padding: 10px 15px;
   outline: none;
-  border: 1px solid rgba(0,0,0,.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 2px;
-  background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
-  transition: all .218s ease 0s;
+  background: rgb(245, 245, 245) linear-gradient(#f4f4f4, #f1f1f1);
+  transition: all 0.218s ease 0s;
 }
 </style>

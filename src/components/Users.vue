@@ -1,32 +1,35 @@
 <template>
   <div class="users" style="overflow-x:auto;">
-  <table class="usersTable">
-    <thead>
-      <tr class="usersTable__toolbar">
-        <div class="usersTable__toolbar__title">Users</div>
-      </tr>
-      <tr class="usersTable__headers">
-        <th>ID</th>
-        <th>Username</th>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Is active</th>
-        <th>Last login</th>
-        <th>Is superuser</th>
-      </tr>
-    </thead>
-    <tbody class="usersTable__data">
-      <tr v-for="user in testUsers" v-bind:key="user.id">
-        <td>{{user.id}}</td>
-        <td>{{user.username}}</td>
-        <td>{{user.first_name}}</td>
-        <td>{{user.last_name}}</td>
-        <td>{{user.is_active}}</td>
-        <td>{{user.last_login}}</td>
-        <td>{{user.is_superuser}}</td>
-      </tr>
-    </tbody>
-  </table>
+    <table class="usersTable" id="usersTable">
+      <thead>
+        <tr class="usersTable__toolbar" >
+          <div class="usersTable__toolbar__title">Users</div>
+        </tr>
+        <tr class="usersTable__headers">
+          <th @click="sortTable(0)">
+            ID
+            <i class="arrow"></i>
+            </th>
+          <th>Username</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Is active</th>
+          <th>Last login</th>
+          <th>Is superuser</th>
+        </tr>
+      </thead>
+      <tbody class="usersTable__data">
+        <tr v-for="user in testUsers" v-bind:key="user.id">
+          <td>{{user.id}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.first_name}}</td>
+          <td>{{user.last_name}}</td>
+          <td>{{user.is_active}}</td>
+          <td>{{user.last_login}}</td>
+          <td>{{user.is_superuser}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -63,8 +66,7 @@ export default {
         username: "test_super",
         password: "Nf<U4f<rDbtDxAPn"
       },
-      authToken: "",
-      
+      authToken: ""
     };
   },
   created() {
@@ -84,13 +86,57 @@ export default {
         )
         .then(response => {
           //console.log(response);
-          app.authToken = response.data.token; 
+          app.authToken = response.data.token;
         })
         .catch(error => {
           alert(error + "\n Ошибка подключения");
           console.log("-----error-------");
           console.log(error);
         });
+    },
+    sortTable(n) {
+      var table,
+        rows,
+        switching,
+        i,
+        x,
+        y,
+        shouldSwitch,
+        dir,
+        switchcount = 0;
+      table = document.getElementById("usersTable");
+      switching = true;
+      dir = "asc";
+      while (switching) {
+        switching = false;
+        rows = table.getElementsByTagName("tr");
+        for (i = 2; i < rows.length - 1; i++) {
+          shouldSwitch = false;
+          x = rows[i].getElementsByTagName("td")[n];
+          y = rows[i + 1].getElementsByTagName("td")[n];
+          if (dir == "asc") {
+            if (Number(x.innerHTML) > Number(y.innerHTML)) {
+              shouldSwitch = true;
+              break;
+            }
+          } else if (dir == "desc") {
+            if (Number(x.innerHTML) < Number(y.innerHTML)) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          switchcount++;
+        } else {
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
     }
     // getUsers() {
     //   var app = this;
@@ -116,29 +162,40 @@ export default {
 
 
 <style>
-tr:not(.usersTable__toolbar):hover {background-color: #f5f5f5;}
-.usersTable__toolbar__title{
+tr:not(.usersTable__toolbar):hover {
+  background-color: #f5f5f5;
+}
+.usersTable__toolbar__title {
   font-size: 30px;
   padding: 10px 0px 0px 15px;
 }
-.users{
+.users {
   align-items: center;
   justify-content: center;
   display: flex;
   width: 940px;
   margin: 10px;
 }
-.usersTable{
+.usersTable {
   width: 90%;
   border-collapse: collapse;
-  box-shadow: 0 0 15px rgba(122,122,122,0.5);
+  box-shadow: 0 0 15px rgba(122, 122, 122, 0.5);
 }
-.usersTable th{
+.usersTable th {
   height: 50px;
   text-align: left;
 }
-.usersTable th, td{
+.usersTable th,
+td {
   padding: 15px;
   border-bottom: 1px solid #ddd;
+}
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
 }
 </style>
