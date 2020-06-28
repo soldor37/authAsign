@@ -29,20 +29,22 @@ export default new Vuex.Store({
     login({commit}, user){
       commit('auth_request')
       if(user.username == "123"){
-      const token = "823ehn9a8sydh"
-      localStorage.setItem('token', token)
-      axios.defaults.headers.common['Authorization'] = token
-      commit('auth_success', token, user)
-      }else{
-        console.log('wrong login')
+        const token = "781bd9f1de084f4daa7ba2aa8a71a2eab855354e"
+        localStorage.setItem('token', token)
+        axios.defaults.headers.common['Authorization'] = token
+        commit('auth_success', token, user)
       }
       // return new Promise((resolve, reject) => {
       //   commit('auth_request')
+      //   // let data = {
+      //   //   "username": user.username,
+      //   //   "password": user.password
+      //   // }
       //   axios
       //   .post(`http://emphasoft-test-assignment.herokuapp.com/api-token-auth/`, user)
       //   .then(resp => {
-      //     console.log(resp)
       //     const token = resp.data.token
+      //     console.log(token)
       //     localStorage.setItem('token', token)
       //     axios.defaults.headers.common['Authorization'] = token
       //     commit('auth_success', token, user)

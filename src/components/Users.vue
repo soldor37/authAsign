@@ -85,7 +85,7 @@ export default {
   methods: {
     getData() {
       this.getToken();
-      //  this.getUsers();
+      //this.getUsers();
     },
     getToken() {
       var app = this;
@@ -120,7 +120,7 @@ export default {
       while (switching) {
         switching = false;
         rows = table.getElementsByTagName("tr");
-        for (i = 2; i < rows.length - 1; i++) {
+        for (i = 1; i < rows.length - 1; i++) {
           shouldSwitch = false;
           x = rows[i].getElementsByTagName("td")[n];
           y = rows[i + 1].getElementsByTagName("td")[n];
@@ -168,13 +168,13 @@ export default {
           }
         }
       }
-    }
+    },
     // getUsers() {
     //   var app = this;
     //   axios
     //     .get(`http://emphasoft-test-assignment.herokuapp.com/api/v1/users/`, {
     //       headers: {
-    //         Authorization: app.authToken,
+    //         Authorization: localStorage.token,
     //       }
     //     })
     //     .then(response => {
@@ -193,7 +193,7 @@ export default {
 
 
 <style>
-tr:not(.usersTable__toolbar):hover {
+.usersTable__data tr:hover {
   background-color: #f5f5f5;
 }
 .usersTable__toolbar{
