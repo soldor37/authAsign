@@ -10,7 +10,8 @@
             @keyup="searchUser()"
             placeholder="Search for username.."
           />
-        </div>
+      </div>
+      <div class="usersTable__toolbar__sortBtn" @click="sortTable(0)">Sort by ID</div>
     <table class="usersTable" id="usersTable">
       <thead>
         <tr class="usersTable__headers">
@@ -43,7 +44,7 @@
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
 export default {
   name: "users",
   data() {
@@ -84,26 +85,26 @@ export default {
   },
   methods: {
     getData() {
-      this.getToken();
+      //this.getToken();
       //this.getUsers();
     },
-    getToken() {
-      var app = this;
-      axios
-        .post(
-          `http://emphasoft-test-assignment.herokuapp.com/api-token-auth/`,
-          app.authData
-        )
-        .then(response => {
-          //console.log(response);
-          app.authToken = response.data.token;
-        })
-        .catch(error => {
-          alert(error + "\n Ошибка подключения");
-          console.log("-----error-------");
-          console.log(error);
-        });
-    },
+    // getToken() {
+    //   var app = this;
+    //   axios
+    //     .post(
+    //       `http://emphasoft-test-assignment.herokuapp.com/api-token-auth/`,
+    //       app.authData
+    //     )
+    //     .then(response => {
+    //       //console.log(response);
+    //       app.authToken = response.data.token;
+    //     })
+    //     .catch(error => {
+    //       alert(error + "\n Ошибка подключения");
+    //       console.log("-----error-------");
+    //       console.log(error);
+    //     });
+    // },
     sortTable(n) {
       var table,
         rows,
@@ -247,5 +248,61 @@ td {
   padding: 12px 20px 12px 40px; 
   border: 1px solid #ddd; 
   margin-bottom: 12px; 
+}
+.usersTable__toolbar__sortBtn{
+  display: none;
+  width: 80px;
+  height: 30px;
+  margin: auto auto 10px auto;
+  font-family: arial, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  color: rgb(68, 68, 68);
+  text-decoration: none;
+  user-select: none;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background: rgb(245, 245, 245) linear-gradient(#f4f4f4, #f1f1f1);
+  transition: all 0.218s ease 0s;
+}
+@media only screen and (max-width: 760px) {
+  .usersTable__toolbar__sortBtn{
+    display: block;
+  }
+  .userTable__toolbar__search{
+    padding: 12px 20px 12px 10px;
+  }
+  table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+  thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+  tr { border: 1px solid #ccc; }
+  td { 
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+  td:before { 
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+  td:nth-of-type(1):before { content: "ID"; }
+	td:nth-of-type(2):before { content: "Username"; }
+	td:nth-of-type(3):before { content: "First name"; }
+	td:nth-of-type(4):before { content: "Last name"; }
+	td:nth-of-type(5):before { content: "Is active"; }
+	td:nth-of-type(6):before { content: "Last login"; }
+	td:nth-of-type(7):before { content: "Is superuser"; }
 }
 </style>
