@@ -70,13 +70,14 @@ body{
   margin: 0px;
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   align-content: center;
   position: relative;
 }
 .header-title{
   font-size: 25px;
+  margin-left:45%;
 }
 .view-content{
   flex: 1;
@@ -97,5 +98,33 @@ body{
   margin: 30px 0px 10px 10px;
   display: flex;
   justify-content: flex-start;
+}
+.header__logout{
+  align-self: center;
+  margin-right: 15px;
+}
+.header__logout__btn:hover{
+  color: rgb(24,24,24);
+  border: 1px solid rgb(198,198,198);
+  background: #f7f7f7 linear-gradient(#f7f7f7, #f1f1f1);
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+.header__logout__btn:focus {
+  outline: none;
+}
+.header__logout__btn{
+  display: inline-block;
+  font-family: arial,sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(68,68,68);
+  text-decoration: none;
+  user-select: none;
+  padding: 10px 15px;
+  outline: none;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 2px;
+  background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
+  transition: all .218s ease 0s;
 }
 </style>
