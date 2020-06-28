@@ -1,15 +1,23 @@
 <template>
+<div class="page">
   <div class="users" style="overflow-x:auto;">
+    <div class="usersTable__toolbar">
+          <div class="usersTable__toolbar__title">Users</div>
+          <input
+            type="text"
+            class="userTable__toolbar__search"
+            v-model="searchInput"
+            @keyup="searchUser()"
+            placeholder="Search for username.."
+          />
+        </div>
     <table class="usersTable" id="usersTable">
       <thead>
-        <tr class="usersTable__toolbar" >
-          <div class="usersTable__toolbar__title">Users</div>
-        </tr>
         <tr class="usersTable__headers">
           <th @click="sortTable(0)">
             ID
             <i class="arrow"></i>
-            </th>
+          </th>
           <th>Username</th>
           <th>First name</th>
           <th>Last name</th>
@@ -31,6 +39,7 @@
       </tbody>
     </table>
   </div>
+  </div>
 </template>
 
 <script>
@@ -40,6 +49,7 @@ export default {
   data() {
     return {
       users: [],
+      searchInput:'',
       testUsers: [
         {
           id: 0,
@@ -137,6 +147,27 @@ export default {
           }
         }
       }
+    },
+    searchUser() {
+      let app = this;
+      let filter
+      let table
+      let tr, td, i;
+      filter = app.searchInput.toUpperCase();
+      table = document.getElementById("usersTable");
+      tr = table.getElementsByTagName("tr");
+      //console.log(filter, table, tr)
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 1; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
     }
     // getUsers() {
     //   var app = this;
@@ -165,23 +196,34 @@ export default {
 tr:not(.usersTable__toolbar):hover {
   background-color: #f5f5f5;
 }
+.usersTable__toolbar{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+}
 .usersTable__toolbar__title {
   font-size: 30px;
   padding: 10px 0px 0px 15px;
+  margin-right: 20px;
 }
-.users {
+.users{
+  padding: 10px;
+  box-shadow: 0 0 15px rgba(122, 122, 122, 0.5);
+}
+.page {
   align-items: center;
   justify-content: center;
   display: flex;
+  flex-flow: column wrap;
   width: 940px;
   margin: 10px;
 }
 .usersTable {
-  width: 90%;
+  width: 100%;
   border-collapse: collapse;
-  box-shadow: 0 0 15px rgba(122, 122, 122, 0.5);
 }
 .usersTable th {
+  -webkit-user-select: none;
   height: 50px;
   text-align: left;
 }
@@ -191,11 +233,19 @@ td {
   border-bottom: 1px solid #ddd;
 }
 .arrow {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-    transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
+  border: solid black;
+  border-radius: 20%;
+  border-width: 0px 3px 3px 0px;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+.userTable__toolbar__search{
+  width: 100%; 
+  font-size: 16px; 
+  padding: 12px 20px 12px 40px; 
+  border: 1px solid #ddd; 
+  margin-bottom: 12px; 
 }
 </style>
