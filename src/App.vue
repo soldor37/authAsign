@@ -4,7 +4,7 @@
       <header class="header-content">
       <div class="header-title">Test assignment</div>
       <div class="header__logout">
-        <button class="header__logout__btn" @click="logout()" >Logout</button>
+        <button v-if="isLoggedIn" class="header__logout__btn" @click="logout()" >Logout</button>
       </div>
     </header>
     <content class="view-content">

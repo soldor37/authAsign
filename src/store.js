@@ -29,19 +29,16 @@ export default new Vuex.Store({
     login({commit}, user){
       return new Promise((resolve, reject) => {
         commit('auth_request')
-        .then(function(){
-          console.log(user)
+        axios
+        .post(`http://emphasoft-test-assignment.herokuapp.com/api-token-auth/`, user)
+        .then(resp => {
+          console.log(resp)
+          const token = resp.data.token
+          localStorage.setItem('token', token)
+          axios.defaults.headers.common['Authorization'] = token
+          commit('auth_success', token, user)
+          resolve(resp)
         })
-        // axios
-        // .post(`http://emphasoft-test-assignment.herokuapp.com/api-token-auth/`, user)
-        // .then(resp => {
-        //   const token = resp.data.token
-        //   localStorage.setItem('token', token)
-        //   //localStorage.setItem('is_admin',JSON.stringify(resp.data.user.is_admin))
-        //   axios.defaults.headers.common['Authorization'] = token
-        //   commit('auth_success', token, user)
-        //   resolve(resp)
-        // })
         .catch(err => {
           commit('auth_error')
           localStorage.removeItem('token')
