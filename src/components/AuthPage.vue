@@ -5,13 +5,13 @@
         Authentification
       </span>
       <div class="window__wrap-input">
-        <input type="text" placeholder="Login" class="window__input"/>
+        <input type="text" v-model="user.login" placeholder="Login" class="window__input"/>
       </div>
       <div class="window__wrap-input">
-        <input type="password" placeholder="Password" class="window__input"/>
+        <input type="password" v-model="user.password" placeholder="Password" class="window__input"/>
       </div>
       <div class="window__submit">
-        <button type="submit" class="window__submit__btn">Submit</button>
+        <button class="window__submit__btn" @click="submit()" >Submit</button>
       </div>
     </form>
   </div>
@@ -19,7 +19,24 @@
 
 <script>
 export default {
-
+  name: "auth",
+  data(){
+    return{
+      user: {
+        login: '',
+        password: '',
+      }
+    }
+  },
+  methods: {
+      submit() {
+        let username = this.user.login 
+        let password = this.user.password
+        this.$store.dispatch('login', { username, password })
+       .then(() => this.$router.push('/users'))
+       .catch(err => console.log(err))
+      }
+    }
 };
 </script>
 
@@ -34,6 +51,7 @@ export default {
 }
 .window__title{
   font-size: 20px;
+  font-weight: 600;
   padding-bottom: 40px;
 }
 .window {
@@ -58,7 +76,6 @@ export default {
 }
 .window__input{
   margin: 5px;
-  text-transform: uppercase;
   background: transparent;
   border: none;
   outline: none;

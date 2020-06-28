@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import store from './store.js'
+import Axios from 'axios'
 
 import AuthPage from './components/AuthPage.vue'
 import Users from './components/Users.vue'
@@ -9,25 +11,30 @@ Vue.config.productionTip = false
 
 Vue.use(VueRouter)
 
+Vue.prototype.$http = Axios;
+const token = localStorage.getItem('token')
+if (token) {
+  Vue.prototype.$http.defaults.headers.common['Authorization'] = token
+}
+
 const routes = [
   { 
     path: '/auth',
     component: AuthPage,
     name: 'auth',
-    // meta: { 
-    //   requiresAuth: true,
-    //   is_admin: true
-    // } 
+    meta: { 
+      requiresAuth: false,
+    } 
   },
   { 
     path: '/users',
     component: Users,
     name: 'users',
-    // meta: { 
-    //   requiresAuth: true,
-    //   is_admin: true
-    // } 
+    meta: { 
+      requiresAuth: true,
+    } 
   },
+  { path: '*', redirect: '/users' }
 ]
 
 const router = new VueRouter({
@@ -35,7 +42,23 @@ const router = new VueRouter({
   mode: 'history'
 })
 
+router.beforeEach((to, from, next) => {
+ if(to.matched.some(record => record.meta.requiresAuth)){
+    if (store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    else{
+      next('/auth')
+    }
+  }
+  else{
+    next()
+  }
+})
+
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')
