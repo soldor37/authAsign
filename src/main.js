@@ -18,21 +18,18 @@ if (token) {
 }
 
 const routes = [
-  { 
+  {
     path: '/auth',
     component: AuthPage,
     name: 'auth',
-    meta: { 
-      requiresAuth: false,
-    } 
   },
-  { 
+  {
     path: '/users',
     component: Users,
     name: 'users',
-    meta: { 
+    meta: {
       requiresAuth: true,
-    } 
+    }
   },
   { path: '*', redirect: '/users' }
 ]
@@ -48,13 +45,12 @@ router.beforeEach((to, from, next) => {
       next()
       return
     }
-    else{
-      next('/auth')
-    }
+    next('/auth')
   }
-  else{
-    next()
+  else if (store.getters.isLoggedIn && to.name == "auth"){
+    next('/users')
   }
+  else next()
 })
 
 new Vue({
