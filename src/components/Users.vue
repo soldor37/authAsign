@@ -288,7 +288,7 @@ td {
   background: rgb(245, 245, 245) linear-gradient(#f4f4f4, #f1f1f1);
   transition: all 0.218s ease 0s;
 }
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 850px) {
   .users{
     min-width: 305px;
   }

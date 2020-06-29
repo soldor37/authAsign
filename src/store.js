@@ -43,7 +43,7 @@ export default new Vuex.Store({
           "password": user.password
         }
         axios
-        .post(`http://emphasoft-test-assignment.herokuapp.com/api-token-auth/`, data)
+        .post(`//emphasoft-test-assignment.herokuapp.com/api-token-auth/`, data)
         .then(resp => {
           const token = resp.data.token
           console.log(token)
