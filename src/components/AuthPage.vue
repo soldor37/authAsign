@@ -1,21 +1,34 @@
 <template>
   <div class="auth">
-    <form class="window">
+    <form class="window" @submit.prevent="submitAuth">
       <span class="window__title">Authentification</span>
-      <div class="window__wrap-input">
+      <div
+        class="window__wrap-input"
+        v-bind:class="{'is-invalid': submitted && $v.user.login.$error }"
+      >
         <input type="text" v-model="user.login" placeholder="Login" class="window__input" />
       </div>
-      <div class="window__wrap-input">
+      <div v-if="submitted && !$v.user.login.required" class="invalid-feedback">Login is required</div>
+      <div
+        class="window__wrap-input"
+        v-bind:class="{'is-invalid': submitted && $v.user.login.$error }"
+      >
         <input type="password" v-model="user.password" placeholder="Password" class="window__input" />
       </div>
+      <div
+        v-if="submitted && !$v.user.password.required"
+        class="invalid-feedback"
+      >Password is required</div>
       <div class="window__submit">
-        <button class="window__submit__btn" @click="submitAuth()">Submit</button>
+        <button class="window__submit__btn" type="submit">Submit</button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import { required, minLength, maxLength } from "vuelidate/lib/validators";
+
 export default {
   name: "auth",
   data() {
@@ -23,18 +36,40 @@ export default {
       user: {
         login: "",
         password: ""
-      }
+      },
+
+      submitted: false
     };
+  },
+  validations: {
+    user: {
+      login: {
+        required,
+        minLength: minLength(1),
+        maxLength: maxLength(150)
+      },
+      password: {
+        required,
+        minLength: minLength(1),
+        maxLength: maxLength(128)
+      }
+    }
   },
   methods: {
     submitAuth() {
-      event.preventDefault();
-      let username = this.user.login;
-      let password = this.user.password;
-      this.$store
-        .dispatch("login", { username, password })
-        .then(() => this.$router.push("/users"))
-        .catch(err => console.log(err));
+      this.submitted = true;
+      // event.preventDefault();
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        this.submitStatus = "ERROR";
+      } else {
+        let username = this.login;
+        let password = this.password;
+        this.$store
+          .dispatch("login", { username, password })
+          .then(() => this.$router.push("/users"))
+          .catch(err => console.log(err));
+      }
     }
   }
 };
@@ -115,6 +150,13 @@ export default {
   border-radius: 2px;
   background: rgb(245, 245, 245) linear-gradient(#f4f4f4, #f1f1f1);
   transition: all 0.218s ease 0s;
+}
+.is-invalid {
+  border: 1px solid crimson;
+}
+.invalid-feedback {
+  font-size: 14px;
+  color: crimson;
 }
 @media only screen and (max-width: 670px) {
   .window {
