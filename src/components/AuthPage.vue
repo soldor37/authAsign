@@ -28,11 +28,12 @@ export default {
   },
   methods: {
     submitAuth() {
+      event.preventDefault();
       let username = this.user.login;
       let password = this.user.password;
       this.$store
         .dispatch("login", { username, password })
-        .then(() => this.$router.push('/users'))
+        .then(() => this.$router.push("/users"))
         .catch(err => console.log(err));
     }
   }
@@ -116,7 +117,7 @@ export default {
   transition: all 0.218s ease 0s;
 }
 @media only screen and (max-width: 670px) {
-  .window{
+  .window {
     padding: 15px;
   }
 }
