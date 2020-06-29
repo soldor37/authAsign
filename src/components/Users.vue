@@ -228,6 +228,7 @@ export default {
   margin-right: 20px;
 }
 .users{
+  min-width: 803px;
   padding: 10px;
   box-shadow: 0 0 15px rgba(122, 122, 122, 0.5);
 }
@@ -288,6 +289,9 @@ td {
   transition: all 0.218s ease 0s;
 }
 @media only screen and (max-width: 760px) {
+  .users{
+    min-width: 305px;
+  }
   .usersTable__toolbar__sortBtn{
     display: block;
   }

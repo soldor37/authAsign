@@ -134,8 +134,8 @@ export default {
 .window__submit {
   margin-top: 20px;
   margin-bottom: 10px;
-  width: 175px;
-  height: 25px;
+  /* width: 175px;
+  height: 25px; */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

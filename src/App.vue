@@ -90,7 +90,7 @@ header {
 .view-content {
   padding-top: 10%;
   padding-bottom: 10%;
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
