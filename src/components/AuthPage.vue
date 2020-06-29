@@ -8,19 +8,27 @@
       >
         <input type="text" v-model="user.login" placeholder="Login" class="window__input" />
       </div>
-      <div v-if="submitted && !$v.user.login.required" class="invalid-feedback">Login is required</div>
+      <div v-if="submitted && !$v.user.login.required" class="invalid-feedback">
+        <span v-if="!$v.user.login.required">Login is required</span>
+        <span v-if="!$v.user.login.minLength">Login must be at least 1 character</span>
+        <span v-if="!$v.user.login.maxLength">Login must be maximum 150 characters long</span>
+      </div>
       <div
         class="window__wrap-input"
-        v-bind:class="{'is-invalid': submitted && $v.user.login.$error }"
+        v-bind:class="{'is-invalid': submitted && $v.user.password.$error }"
       >
         <input type="password" v-model="user.password" placeholder="Password" class="window__input" />
       </div>
-      <div
-        v-if="submitted && !$v.user.password.required"
-        class="invalid-feedback"
-      >Password is required</div>
+      <div v-if="submitted && !$v.user.password.required" class="invalid-feedback">
+        <span v-if="!$v.user.password.required">Password is required</span>
+        <span v-if="!$v.user.password.minLength">Password must be at least 1 character</span>
+        <span v-if="!$v.user.password.maxLength">Password must be maximum 128 characters long</span>
+      </div>
       <div class="window__submit">
         <button class="window__submit__btn" type="submit">Submit</button>
+      </div>
+      <div v-if="wrongUserData" class="invalid-feedback">
+        <span>Wrong login and/or password</span>
       </div>
     </form>
   </div>
@@ -38,7 +46,8 @@ export default {
         password: ""
       },
 
-      submitted: false
+      submitted: false,
+      wrongUserData: false
     };
   },
   validations: {
@@ -58,17 +67,21 @@ export default {
   methods: {
     submitAuth() {
       this.submitted = true;
+      this.wrongUserData = false;
       // event.preventDefault();
       this.$v.$touch();
       if (this.$v.$invalid) {
-        this.submitStatus = "ERROR";
+        return;
       } else {
-        let username = this.login;
-        let password = this.password;
+        let username = this.user.login;
+        let password = this.user.password;
         this.$store
           .dispatch("login", { username, password })
           .then(() => this.$router.push("/users"))
-          .catch(err => console.log(err));
+          .catch(err => {
+            this.wrongUserData = true;
+            console.log(err);
+          });
       }
     }
   }
@@ -155,6 +168,7 @@ export default {
   border: 1px solid crimson;
 }
 .invalid-feedback {
+  margin-top: 5px;
   font-size: 14px;
   color: crimson;
 }
