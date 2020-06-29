@@ -68,9 +68,29 @@ export default {
           first_name: "vadim",
           last_name: "asdasd3434",
           password: "fgfgergr",
-          is_active: true,
+          is_active: false,
           last_login: "2020-06-27T14:31:59.700Z",
           is_superuser: false
+        },
+        {
+          id: 2,
+          username: "test3",
+          first_name: "Name",
+          last_name: "uykyukg",
+          password: "fgfgergr",
+          is_active: true,
+          last_login: "2020-06-27T14:31:59.700Z",
+          is_superuser: true
+        },
+        {
+          id: 3,
+          username: "test4",
+          first_name: "Name2",
+          last_name: "ewrwfds",
+          password: "fgfgergr",
+          is_active: false,
+          last_login: "2020-06-27T14:31:59.700Z",
+          is_superuser: true
         }
       ],
       authData: {

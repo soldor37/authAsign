@@ -1,20 +1,20 @@
 <template>
 <div id="app" class="app">
   <body>
-    <header class="header-content">
+    <div class="header-content">
       <div class="header-title">Test assignment</div>
       <div class="header__logout">
         <button v-if="isLoggedIn" class="header__logout__btn" @click="logout()">Logout</button>
       </div>
-    </header>
+    </div>
+    <header class="header"></header>
     <content class="view-content">
       <router-view></router-view>
     </content>
-    <footer class="footer-content">
-      <div class="footer-title">
-        <span class="footer-title__text">© 2020</span>
-      </div>
-    </footer>
+    <footer class="footer-content"></footer>
+    <div class="footer-title">
+      <span class="footer-title__text">© 2020</span>
+    </div>
   </body>
 </div>
 </template>
@@ -43,8 +43,7 @@ export default {
         throw err;
       });
     });
-  },
-  
+  }
 };
 </script>
 
@@ -63,42 +62,65 @@ body {
   flex-flow: column wrap;
   margin: -10px;
 } */
-.header-content {
+header {
   background-color: skyblue;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
   height: 70px;
   margin: 0px;
+  box-shadow: 0 0 15px rgba(122, 122, 122, 0.5);
+}
+.header-content {
+  z-index: 5;
+  height: 70px;
+  width: 100%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
   align-content: center;
-  position: relative;
-  box-shadow: 0 0 15px rgba(122, 122, 122, 0.5);
+  position: fixed;
 }
 .header-title {
   font-size: 25px;
   margin-left: 25px;
 }
 .view-content {
+  padding-top: 10%;
+  padding-bottom: 10%;
   flex: 1;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
 }
 .footer-content {
-  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
   background-color: skyblue;
   height: 70px;
   margin: 0px;
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
+  align-items: center;
   box-shadow: 0 0 15px rgba(122, 122, 122, 0.5);
 }
 .footer-title {
-  margin: 30px 0px 10px 10px;
+  left: 0;
+  bottom: 0;
+  height: 70px;
+  width: 100%;
+  z-index: 5;
+  position: fixed;
+  padding-left: 6px;
   display: flex;
-  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
 }
 .header__logout {
   align-self: center;
@@ -129,6 +151,11 @@ body {
   transition: all 0.218s ease 0s;
 }
 @media only screen and (max-width: 670px) {
-  
+  .view-content {
+    padding-top: 20%;
+  }
+  .footer-content, .footer-title {
+    height: 35px;
+  }
 }
 </style>
