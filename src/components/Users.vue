@@ -51,53 +51,6 @@ export default {
     return {
       users: [],
       searchInput: ""
-      // testUsers: [
-      //   {
-      //     id: 0,
-      //     username: "test1",
-      //     first_name: "Gera",
-      //     last_name: "asdasd",
-      //     password: "asdasdasd34",
-      //     is_active: true,
-      //     last_login: "2020-06-27T14:31:59.700Z",
-      //     is_superuser: true
-      //   },
-      //   {
-      //     id: 1,
-      //     username: "test2",
-      //     first_name: "vadim",
-      //     last_name: "asdasd3434",
-      //     password: "fgfgergr",
-      //     is_active: false,
-      //     last_login: "2020-06-27T14:31:59.700Z",
-      //     is_superuser: false
-      //   },
-      //   {
-      //     id: 2,
-      //     username: "test3",
-      //     first_name: "Name",
-      //     last_name: "uykyukg",
-      //     password: "fgfgergr",
-      //     is_active: true,
-      //     last_login: "2020-06-27T14:31:59.700Z",
-      //     is_superuser: true
-      //   },
-      //   {
-      //     id: 3,
-      //     username: "test4",
-      //     first_name: "Name2",
-      //     last_name: "ewrwfds",
-      //     password: "fgfgergr",
-      //     is_active: false,
-      //     last_login: "2020-06-27T14:31:59.700Z",
-      //     is_superuser: true
-      //   }
-      // ],
-      // authData: {
-      //   username: "test_super",
-      //   password: "Nf<U4f<rDbtDxAPn"
-      // },
-      // authToken: ""
     };
   },
   created() {
@@ -105,26 +58,9 @@ export default {
   },
   methods: {
     getData() {
-      //this.getToken();
       this.getUsers();
     },
-    // getToken() {
-    //   var app = this;
-    //   axios
-    //     .post(
-    //       `http://emphasoft-test-assignment.herokuapp.com/api-token-auth/`,
-    //       app.authData
-    //     )
-    //     .then(response => {
-    //       //console.log(response);
-    //       app.authToken = response.data.token;
-    //     })
-    //     .catch(error => {
-    //       alert(error + "\n Ошибка подключения");
-    //       console.log("-----error-------");
-    //       console.log(error);
-    //     });
-    // },
+    
     sortTable(n) {
       var table,
         rows,
