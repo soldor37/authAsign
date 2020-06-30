@@ -88,12 +88,11 @@ header {
   margin-left: 25px;
 }
 .view-content {
-  padding-top: 10%;
-  padding-bottom: 10%;
+  margin: 10% 5% 10% 5%;
   /* flex: 1; */
-  display: flex;
+  /* display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: center; */
 }
 .footer-content {
   left: 0;

@@ -1,6 +1,6 @@
 <template>
 <div class="page">
-  <div class="users" style="overflow-x:auto;">
+  <div class="users">
     <div class="usersTable__toolbar">
           <div class="usersTable__toolbar__title">Users</div>
           <input
@@ -28,7 +28,7 @@
         </tr>
       </thead>
       <tbody class="usersTable__data">
-        <tr v-for="user in testUsers" v-bind:key="user.id">
+        <tr v-for="user in users" v-bind:key="user.id">
           <td>{{user.id}}</td>
           <td>{{user.username}}</td>
           <td>{{user.first_name}}</td>
@@ -44,60 +44,60 @@
 </template>
 
 <script>
-//import axios from "axios";
+import axios from "axios";
 export default {
   name: "users",
   data() {
     return {
       users: [],
       searchInput:'',
-      testUsers: [
-        {
-          id: 0,
-          username: "test1",
-          first_name: "Gera",
-          last_name: "asdasd",
-          password: "asdasdasd34",
-          is_active: true,
-          last_login: "2020-06-27T14:31:59.700Z",
-          is_superuser: true
-        },
-        {
-          id: 1,
-          username: "test2",
-          first_name: "vadim",
-          last_name: "asdasd3434",
-          password: "fgfgergr",
-          is_active: false,
-          last_login: "2020-06-27T14:31:59.700Z",
-          is_superuser: false
-        },
-        {
-          id: 2,
-          username: "test3",
-          first_name: "Name",
-          last_name: "uykyukg",
-          password: "fgfgergr",
-          is_active: true,
-          last_login: "2020-06-27T14:31:59.700Z",
-          is_superuser: true
-        },
-        {
-          id: 3,
-          username: "test4",
-          first_name: "Name2",
-          last_name: "ewrwfds",
-          password: "fgfgergr",
-          is_active: false,
-          last_login: "2020-06-27T14:31:59.700Z",
-          is_superuser: true
-        }
-      ],
-      authData: {
-        username: "test_super",
-        password: "Nf<U4f<rDbtDxAPn"
-      },
-      authToken: ""
+      // testUsers: [
+      //   {
+      //     id: 0,
+      //     username: "test1",
+      //     first_name: "Gera",
+      //     last_name: "asdasd",
+      //     password: "asdasdasd34",
+      //     is_active: true,
+      //     last_login: "2020-06-27T14:31:59.700Z",
+      //     is_superuser: true
+      //   },
+      //   {
+      //     id: 1,
+      //     username: "test2",
+      //     first_name: "vadim",
+      //     last_name: "asdasd3434",
+      //     password: "fgfgergr",
+      //     is_active: false,
+      //     last_login: "2020-06-27T14:31:59.700Z",
+      //     is_superuser: false
+      //   },
+      //   {
+      //     id: 2,
+      //     username: "test3",
+      //     first_name: "Name",
+      //     last_name: "uykyukg",
+      //     password: "fgfgergr",
+      //     is_active: true,
+      //     last_login: "2020-06-27T14:31:59.700Z",
+      //     is_superuser: true
+      //   },
+      //   {
+      //     id: 3,
+      //     username: "test4",
+      //     first_name: "Name2",
+      //     last_name: "ewrwfds",
+      //     password: "fgfgergr",
+      //     is_active: false,
+      //     last_login: "2020-06-27T14:31:59.700Z",
+      //     is_superuser: true
+      //   }
+      // ],
+      // authData: {
+      //   username: "test_super",
+      //   password: "Nf<U4f<rDbtDxAPn"
+      // },
+      // authToken: ""
     };
   },
   created() {
@@ -106,7 +106,7 @@ export default {
   methods: {
     getData() {
       //this.getToken();
-      //this.getUsers();
+      this.getUsers();
     },
     // getToken() {
     //   var app = this;
@@ -190,24 +190,24 @@ export default {
         }
       }
     },
-    // getUsers() {
-    //   var app = this;
-    //   axios
-    //     .get(`http://emphasoft-test-assignment.herokuapp.com/api/v1/users/`, {
-    //       headers: {
-    //         Authorization: localStorage.token,
-    //       }
-    //     })
-    //     .then(response => {
-    //       console.log(response);
-    //       app.users = response.data;
-    //     })
-    //     .catch(error => {
-    //       alert(error + "\n Ошибка подключения");
-    //       console.log("-----error-------");
-    //       console.log(error);
-    //     });
-    // },
+    getUsers() {
+      var app = this;
+      axios
+        .get(`http://emphasoft-test-assignment.herokuapp.com/api/v1/users/`, {
+          headers: {
+            Authorization: "Token " + localStorage.token,
+          }
+        })
+        .then(response => {
+          console.log(response);
+          app.users = response.data;
+        })
+        .catch(error => {
+          alert(error + "\n Ошибка подключения");
+          console.log("-----error-------");
+          console.log(error);
+        });
+    },
   }
 };
 </script>
@@ -227,18 +227,19 @@ export default {
   padding: 10px 0px 0px 15px;
   margin-right: 20px;
 }
+.page {
+  /* align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-flow: column wrap; */
+  margin: 10px;
+}
 .users{
+  margin: auto;
+  overflow: auto;
   min-width: 803px;
   padding: 10px;
   box-shadow: 0 0 15px rgba(122, 122, 122, 0.5);
-}
-.page {
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  flex-flow: column wrap;
-  width: 940px;
-  margin: 10px;
 }
 .usersTable {
   width: 100%;
@@ -287,6 +288,12 @@ td {
   border-radius: 12px;
   background: rgb(245, 245, 245) linear-gradient(#f4f4f4, #f1f1f1);
   transition: all 0.218s ease 0s;
+}
+@media only screen and (max-width: 2080px) {
+td {
+ max-width: 100px;
+ word-wrap:break-word;
+}
 }
 @media only screen and (max-width: 850px) {
   .users{
