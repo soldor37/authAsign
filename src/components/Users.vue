@@ -128,7 +128,7 @@ export default {
     getUsers() {
       var app = this;
       axios
-        .get(`http://emphasoft-test-assignment.herokuapp.com/api/v1/users/`, {
+        .get(`//emphasoft-test-assignment.herokuapp.com/api/v1/users/`, {
           headers: {
             Authorization: "Token " + localStorage.token
           }
