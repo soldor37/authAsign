@@ -75,7 +75,7 @@ export default {
         dir,
         switchcount = 0;
       table = document.getElementById("usersTable");
-      var arrow = document.getElementById("arrow");
+      var arrow = document.getElementsByClassName("arrow-up");
       switching = true;
       dir = "asc";
       while (switching) {
@@ -88,7 +88,8 @@ export default {
           if (dir == "asc") {
             if (Number(x.innerHTML) > Number(y.innerHTML)) {
               shouldSwitch = true;
-              arrow.style.transform='rotate(-135deg)';
+              arrow[0].style.transform='rotate(-135deg)';
+              arrow[1].style.transform='rotate(-135deg)';
               break;
             }
           } else if (dir == "desc") {
@@ -104,7 +105,8 @@ export default {
           switchcount++;
         } else {
           if (switchcount == 0 && dir == "asc") {
-            arrow.style.transform='rotate(45deg)';
+            arrow[0].style.transform='rotate(45deg)';
+            arrow[1].style.transform='rotate(45deg)';
             dir = "desc";
             switching = true;
           }
@@ -255,7 +257,6 @@ td {
   }
   .arrow-up{
     margin-left: 10px;
-    
   }
   table,
   thead,
