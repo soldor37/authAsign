@@ -11,13 +11,16 @@
           placeholder="Search for username.."
         />
       </div>
-      <div class="usersTable__toolbar__sortBtn" @click="sortTable(0)">Sort by ID</div>
+      <div class="usersTable__toolbar__sortBtn" @click="sortTable(0)">
+        <p>Sort by ID</p>
+        <i id="arrow" class="arrow-up"></i>
+      </div>
       <table class="usersTable" id="usersTable">
         <thead>
           <tr class="usersTable__headers">
-            <th @click="sortTable(0)">
+            <th @click="sortTable(0)" class="sorting">
               ID
-              <i class="arrow"></i>
+              <i id="arrow" class="arrow-up"></i>
             </th>
             <th>Username</th>
             <th>First name</th>
@@ -60,7 +63,7 @@ export default {
     getData() {
       this.getUsers();
     },
-    
+
     sortTable(n) {
       var table,
         rows,
@@ -72,6 +75,7 @@ export default {
         dir,
         switchcount = 0;
       table = document.getElementById("usersTable");
+      var arrow = document.getElementById("arrow");
       switching = true;
       dir = "asc";
       while (switching) {
@@ -84,6 +88,7 @@ export default {
           if (dir == "asc") {
             if (Number(x.innerHTML) > Number(y.innerHTML)) {
               shouldSwitch = true;
+              arrow.style.transform='rotate(-135deg)';
               break;
             }
           } else if (dir == "desc") {
@@ -99,6 +104,7 @@ export default {
           switchcount++;
         } else {
           if (switchcount == 0 && dir == "asc") {
+            arrow.style.transform='rotate(45deg)';
             dir = "desc";
             switching = true;
           }
@@ -128,7 +134,7 @@ export default {
     getUsers() {
       var app = this;
       axios
-        .get(`//emphasoft-test-assignment.herokuapp.com/api/v1/users/`, {
+        .get(`https://emphasoft-test-assignment.herokuapp.com/api/v1/users/`, {
           headers: {
             Authorization: "Token " + localStorage.token
           }
@@ -190,14 +196,20 @@ td {
   padding: 15px;
   border-bottom: 1px solid #ddd;
 }
-.arrow {
+.sorting {
+  cursor: pointer;
+  cursor: hand;
+}
+.sorting:hover {
+  background: #f5f5f5;
+}
+.arrow-up {
   border: solid black;
   border-radius: 20%;
   border-width: 0px 3px 3px 0px;
   display: inline-block;
   padding: 3px;
   transform: rotate(-135deg);
-  -webkit-transform: rotate(-135deg);
 }
 .userTable__toolbar__search {
   width: 100%;
@@ -208,13 +220,14 @@ td {
 }
 .usersTable__toolbar__sortBtn {
   display: none;
-  width: 80px;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
   height: 30px;
   margin: auto auto 10px auto;
   font-family: arial, sans-serif;
   font-size: 15px;
   font-weight: bold;
-  text-align: center;
   color: rgb(68, 68, 68);
   text-decoration: none;
   user-select: none;
@@ -234,11 +247,15 @@ td {
   .users {
     min-width: 305px;
   }
-  .usersTable__toolbar__sortBtn {
-    display: block;
-  }
   .userTable__toolbar__search {
     padding: 12px 20px 12px 10px;
+  }
+  .usersTable__toolbar__sortBtn{
+    display: flex;
+  }
+  .arrow-up{
+    margin-left: 10px;
+    
   }
   table,
   thead,
@@ -262,10 +279,10 @@ td {
     position: relative;
     padding-left: 50%;
     margin: auto;
+    min-height: 15px;
   }
   td:before {
     position: absolute;
-    top: 6px;
     left: 6px;
     width: 45%;
     padding-right: 10px;
