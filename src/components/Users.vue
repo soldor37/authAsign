@@ -198,6 +198,9 @@ td {
   padding: 15px;
   border-bottom: 1px solid #ddd;
 }
+td{
+  max-width: 100px;
+}
 .sorting {
   cursor: pointer;
   cursor: hand;
@@ -241,7 +244,6 @@ td {
 }
 @media only screen and (max-width: 2080px) {
   td {
-    max-width: 100px;
     word-wrap: break-word;
   }
 }
@@ -279,8 +281,9 @@ td {
     border-bottom: 1px solid #eee;
     position: relative;
     padding-left: 50%;
-    margin: auto;
     min-height: 15px;
+    text-align: center;
+    max-width: 100%;
   }
   td:before {
     position: absolute;
