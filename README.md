@@ -1,24 +1,7 @@
-# auth-test
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# auth-test #
+---
+#### Adaptive layout of the authorization page with validation and displaying an array of data received from an external API ####
+---
+##### Authorization
+Username: test_super
+Password: Nf<U4f<rDbtDxAPn
